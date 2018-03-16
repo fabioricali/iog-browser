@@ -31,7 +31,7 @@ logger.write('my log info');
 ```
 this in your console
 ```
-[A-CONTEXT][LOG][2018-03-16 15:50:05:411] my log info
+[A-CONTEXT][LOG] my log info
 ```
 
 ## API
