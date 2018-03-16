@@ -21,6 +21,7 @@ class Iog {
      * @param {object} [opts] options
      * @param {string} [opts.path=] log path
      * @param {boolean} [opts.pretty=false] Pretty format
+     * @param {boolean} [opts.enableDate=false] Enable date
      * @param {string} [opts.separator=---] log separator
      */
     constructor(contextName, opts = {}) {
@@ -32,7 +33,8 @@ class Iog {
         this.opts = extend(opts, {
             separator: SEPARATOR,
             pretty: false,
-            upperCase: true
+            upperCase: true,
+            enableDate: false,
         });
 
         if(this.opts.upperCase)
@@ -72,20 +74,27 @@ class Iog {
         const _console = console[type in console ? type : 'log'];
         const now = new Date();
         const date = dateFormat(now, 'yyyy-mm-dd HH:MM:ss:l');
+        let date1 = '';
+        let date2 = '';
 
         if(this.opts.upperCase)
             type = type.toUpperCase();
+
+        if (this.opts.enableDate) {
+            date1 = `DATE: ${date}\\n`;
+            date2 = `[${date}]`;
+        }
 
         if (this.opts.pretty) {
             if (typeof msg === 'object' && !isError(msg))
                 msg = stringify(msg, {replace: null, space: 2});
 
-            const body = `CONTEXT: ${this.contextName}\nDATE: ${date}\nTYPE: ${type}\nBODY:\n\n${msg}${this.opts.separator}`;
+            const body = `CONTEXT: ${this.contextName}\n${date1}TYPE: ${type}\nBODY:\n\n${msg}${this.opts.separator}`;
 
             _console(body);
 
         } else {
-            _console(`[${this.contextName}][${type}][${date}]`, msg);
+            _console(`[${this.contextName}][${type}]${date2}`, msg);
         }
 
     }
