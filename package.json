@@ -1,6 +1,6 @@
 {
     "name": "iog-browser",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "Log for browser.",
     "main": "dist/iog.js",
     "scripts": {

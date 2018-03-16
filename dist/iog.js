@@ -1,4 +1,4 @@
-// [AIV_SHORT]  IOG Build version: 0.0.0  
+// [AIV_SHORT]  IOG Build version: 1.0.0  
  (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
