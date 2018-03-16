@@ -1,4 +1,4 @@
-// [AIV_SHORT]  IOG Build version: 1.0.0  
+// [AIV_SHORT]  IOG Build version: 1.0.1  
  (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -120,6 +120,7 @@ var Iog = function () {
      * @param {object} [opts] options
      * @param {string} [opts.path=] log path
      * @param {boolean} [opts.pretty=false] Pretty format
+     * @param {boolean} [opts.enableDate=false] Enable date
      * @param {string} [opts.separator=---] log separator
      */
     function Iog(contextName) {
@@ -133,7 +134,8 @@ var Iog = function () {
         this.opts = extend(opts, {
             separator: SEPARATOR,
             pretty: false,
-            upperCase: true
+            upperCase: true,
+            enableDate: false
         });
 
         if (this.opts.upperCase) this.contextName = this.contextName.toUpperCase();
@@ -184,17 +186,24 @@ var Iog = function () {
             var _console = console[type in console ? type : 'log'];
             var now = new Date();
             var date = dateFormat(now, 'yyyy-mm-dd HH:MM:ss:l');
+            var date1 = '';
+            var date2 = '';
 
             if (this.opts.upperCase) type = type.toUpperCase();
+
+            if (this.opts.enableDate) {
+                date1 = 'DATE: ' + date + '\\n';
+                date2 = '[' + date + ']';
+            }
 
             if (this.opts.pretty) {
                 if ((typeof msg === 'undefined' ? 'undefined' : _typeof(msg)) === 'object' && !isError(msg)) msg = stringify(msg, { replace: null, space: 2 });
 
-                var body = 'CONTEXT: ' + this.contextName + '\nDATE: ' + date + '\nTYPE: ' + type + '\nBODY:\n\n' + msg + this.opts.separator;
+                var body = 'CONTEXT: ' + this.contextName + '\n' + date1 + 'TYPE: ' + type + '\nBODY:\n\n' + msg + this.opts.separator;
 
                 _console(body);
             } else {
-                _console('[' + this.contextName + '][' + type + '][' + date + ']', msg);
+                _console('[' + this.contextName + '][' + type + ']' + date2, msg);
             }
         }
 
