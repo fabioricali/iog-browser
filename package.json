@@ -1,0 +1,51 @@
+{
+    "name": "iog-browser",
+    "version": "0.0.0",
+    "description": "Log for browser.",
+    "main": "dist/iog.js",
+    "scripts": {
+        "version:major": "npm run-script test && webpack --env.major && npm run-script doc && version-to-tag.sh && npm publish",
+        "version:minor": "npm run-script test && webpack --env.minor && npm run-script doc && version-to-tag.sh && npm publish",
+        "version:patch": "npm run-script test && webpack --env.patch && npm run-script doc && version-to-tag.sh && npm publish",
+        "build": "webpack --progress",
+        "test": "mocha test",
+        "doc": "jsdoc2md --template README.hbs --no-gfm --files src/iog.js > README.md"
+    },
+    "author": {
+        "name": "Fabio Ricali",
+        "email": "fabio@rica.li"
+    },
+    "keywords": [
+        "error",
+        "exception",
+        "throw",
+        "log",
+        "debug",
+        "katch",
+        "catch",
+        "logger"
+    ],
+    "license": "MIT",
+    "devDependencies": {
+        "bejs": "^1.16.0",
+        "jsdoc-to-markdown": "^4.0.1",
+        "mocha": "^3.5.3",
+        "babel-core": "^6.26.0",
+        "babel-loader": "^7.1.2",
+        "babel-preset-env": "^1.6.1",
+        "babel-preset-es2015": "^6.24.1",
+        "unminified-webpack-plugin": "^1.4.2",
+        "webpack": "^3.10.0",
+        "webpack-auto-inject-version": "^1.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/fabioricali/iog-browser"
+    },
+    "dependencies": {
+        "dateformat": "^2.2.0",
+        "defaulty": "^1.2.2",
+        "is-error": "^2.2.1",
+        "stringme": "^1.1.1"
+    }
+}

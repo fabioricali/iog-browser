@@ -1,0 +1,45 @@
+# iog
+Log for browser.
+<br/><br/>
+<a href="https://travis-ci.org/fabioricali/iog-browser" target="_blank"><img src="https://travis-ci.org/fabioricali/iog-browser.svg?branch=master" title="Build Status"/></a>
+<a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" title="License: MIT"/></a>
+
+## Installation
+```
+npm install --save iog-browser
+```
+
+## Example
+```javascript
+const Iog = require('iog-browser');
+
+const logger = new Iog('my-module-name');
+
+logger.write('my log info');
+logger.write({
+    also: {
+        you: 'want, for example an object'
+    }
+});
+```
+
+## Log format
+
+this produces
+```javascript
+logger.write('my log info');
+```
+this in your console
+```
+[A-CONTEXT][LOG][2018-03-16 15:50:05:411] my log info
+```
+
+## API
+
+{{>main}}
+
+## License
+iog-browser is open-sourced software licensed under the <a target="_blank" href="http://opensource.org/licenses/MIT">MIT license</a>
+
+## Author
+<a target="_blank" href="http://rica.li">Fabio Ricali</a>
