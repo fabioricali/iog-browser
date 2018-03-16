@@ -31,7 +31,7 @@ logger.write('my log info');
 ```
 this in your console
 ```
-[A-CONTEXT][LOG] my log info
+[A-CONTEXT][LOG][2018-03-16 15:50:05:411] my log info
 ```
 
 ## API
@@ -74,6 +74,9 @@ Iog instance
 </td>
     </tr><tr>
     <td>[opts.pretty]</td><td><code>boolean</code></td><td><code>false</code></td><td><p>Pretty format</p>
+</td>
+    </tr><tr>
+    <td>[opts.enableDate]</td><td><code>boolean</code></td><td><code>false</code></td><td><p>Enable date</p>
 </td>
     </tr><tr>
     <td>[opts.separator]</td><td><code>string</code></td><td><code>&quot;---&quot;</code></td><td><p>log separator</p>
