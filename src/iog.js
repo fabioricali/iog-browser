@@ -70,32 +70,33 @@ class Iog {
     write(msg = '', type = 'log') {
 
         if (this._paused) return;
+        try {
+            const _console = console[type in console ? type : 'log'];
+            const now = new Date();
+            const date = dateFormat(now, 'yyyy-mm-dd HH:MM:ss:l');
+            let date1 = '';
+            let date2 = '';
 
-        const _console = console[type in console ? type : 'log'];
-        const now = new Date();
-        const date = dateFormat(now, 'yyyy-mm-dd HH:MM:ss:l');
-        let date1 = '';
-        let date2 = '';
+            if (this.opts.upperCase)
+                type = type.toUpperCase();
 
-        if(this.opts.upperCase)
-            type = type.toUpperCase();
+            if (this.opts.enableDate) {
+                date1 = `DATE: ${date}\\n`;
+                date2 = `[${date}]`;
+            }
 
-        if (this.opts.enableDate) {
-            date1 = `DATE: ${date}\\n`;
-            date2 = `[${date}]`;
-        }
+            if (this.opts.pretty) {
+                if (typeof msg === 'object' && !isError(msg))
+                    msg = stringify(msg, {replace: null, space: 2});
 
-        if (this.opts.pretty) {
-            if (typeof msg === 'object' && !isError(msg))
-                msg = stringify(msg, {replace: null, space: 2});
+                const body = `CONTEXT: ${this.contextName}\n${date1}TYPE: ${type}\nBODY:\n\n${msg}${this.opts.separator}`;
 
-            const body = `CONTEXT: ${this.contextName}\n${date1}TYPE: ${type}\nBODY:\n\n${msg}${this.opts.separator}`;
+                _console(body);
 
-            _console(body);
-
-        } else {
-            _console(`[${this.contextName}][${type}]${date2}`, msg);
-        }
+            } else {
+                _console(`[${this.contextName}][${type}]${date2}`, msg);
+            }
+        } catch (e) {}
 
     }
 
